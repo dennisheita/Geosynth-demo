@@ -56,12 +56,13 @@ const PackageCard = ({ package: pkg, onClick, isSelected = false }: PackageCardP
   }, []);
 
   const getStatusColor = (status: string) => {
+    // All status colors are now black/white/gray only
     switch (status) {
-      case 'ON THE WAY': return 'bg-gray-600/20 text-gray-300';
+      case 'ON THE WAY': return 'bg-gray-600/20 text-gray-400';
       case 'DELIVERED': return 'bg-white/20 text-white';
-      case 'PENDING': return 'bg-gray-500/20 text-gray-400';
-      case 'DELAYED': return 'bg-gray-700/20 text-gray-500';
-      default: return 'bg-gray-800/20 text-gray-400';
+      case 'PENDING': return 'bg-gray-500/20 text-gray-500';
+      case 'DELAYED': return 'bg-gray-700/20 text-gray-700';
+      default: return 'bg-gray-800/20 text-gray-800';
     }
   };
 

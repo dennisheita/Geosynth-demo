@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { MapPin, Mountain, Eye, Info } from 'lucide-react';
 
@@ -54,12 +55,13 @@ const GeologicalCard = ({ data, onClick, isSelected = false, displayType }: Geol
   }, []);
 
   const getStatusColor = (status: string) => {
+    // All status colors are now black/white/gray only
     switch (status) {
       case 'ACTIVE': return 'bg-white/20 text-white';
-      case 'SURVEYED': return 'bg-gray-300/20 text-gray-200';
-      case 'PENDING': return 'bg-gray-500/20 text-gray-400';
-      case 'RESTRICTED': return 'bg-gray-700/20 text-gray-500';
-      default: return 'bg-gray-800/20 text-gray-400';
+      case 'SURVEYED': return 'bg-gray-300/20 text-gray-300';
+      case 'PENDING': return 'bg-gray-500/20 text-gray-500';
+      case 'RESTRICTED': return 'bg-gray-700/20 text-gray-700';
+      default: return 'bg-gray-800/20 text-gray-800';
     }
   };
 
