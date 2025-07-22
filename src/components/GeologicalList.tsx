@@ -19,18 +19,7 @@ interface GeologicalListProps {
 }
 
 const GeologicalList = ({ data, selectedItem, onItemSelect, searchQuery }: GeologicalListProps) => {
-  // Filter data based on search query
-  const filteredData = data.filter((item) => {
-    if (!searchQuery) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      item.region.toLowerCase().includes(query) ||
-      item.hostRock.toLowerCase().includes(query) ||
-      item.surfaceCues.toLowerCase().includes(query)
-    );
-  });
-
-  if (filteredData.length === 0) {
+  if (data.length === 0) {
     return (
       <div className="p-6 text-center">
         <div className="text-white/50 text-sm">
@@ -43,7 +32,7 @@ const GeologicalList = ({ data, selectedItem, onItemSelect, searchQuery }: Geolo
   // Determine display type based on the index (cycles through the three types)
   return (
     <div className="space-y-3 p-4">
-      {filteredData.map((item, index) => {
+      {data.map((item, index) => {
         const displayTypes: ('region' | 'hostRock' | 'surfaceCues')[] = ['region', 'hostRock', 'surfaceCues'];
         const displayType = displayTypes[index % 3];
         

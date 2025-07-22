@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import MineralSidebar from '@/components/MineralSidebar';
 import GeologicalList from '@/components/GeologicalList';
@@ -15,10 +16,24 @@ const Index = () => {
   const [searchSuggestions, setSearchSuggestions] = useState<any[]>([]);
 
   useEffect(() => {
-    const filteredData = getGeologicalDataByMineral(selectedMineral);
-    setGeologicalData(filteredData);
+    if (searchQuery.length === 0) {
+      // Show filtered data by mineral when no search query
+      const filteredData = getGeologicalDataByMineral(selectedMineral);
+      setGeologicalData(filteredData);
+    } else {
+      // Show all matching deposits when searching
+      const searchResults = mockGeologicalData.filter((item) => {
+        const query = searchQuery.toLowerCase();
+        return (
+          item.region.toLowerCase().includes(query) ||
+          item.hostRock.toLowerCase().includes(query) ||
+          item.surfaceCues.toLowerCase().includes(query)
+        );
+      });
+      setGeologicalData(searchResults);
+    }
     setSelectedItem(null);
-  }, [selectedMineral]);
+  }, [selectedMineral, searchQuery]);
 
   useEffect(() => {
     if (searchQuery.length > 0) {
@@ -101,7 +116,7 @@ const Index = () => {
         }`}>
           <div className="p-4 border-b border-[#2A2A2A]">
             <h2 className="text-white font-semibold text-lg capitalize">
-              {selectedMineral.replace('-', ' ')} Deposits
+              {searchQuery ? 'Search Results' : `${selectedMineral.replace('-', ' ')} Deposits`}
             </h2>
             <p className="text-white/60 text-sm mt-1">
               {geologicalData.length} geological sites
