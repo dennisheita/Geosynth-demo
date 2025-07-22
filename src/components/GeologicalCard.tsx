@@ -55,7 +55,7 @@ const GeologicalCard = ({ data, onClick, isSelected = false, displayType }: Geol
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'ACTIVE': return 'bg-white/20 text-white';
+      case 'ACTIVE': return 'bg-gray-100/20 text-gray-100';
       case 'SURVEYED': return 'bg-gray-600/20 text-gray-300';
       case 'PENDING': return 'bg-gray-700/20 text-gray-400';
       case 'RESTRICTED': return 'bg-gray-800/20 text-gray-500';

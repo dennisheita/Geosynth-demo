@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import MineralSidebar from '@/components/MineralSidebar';
 import GeologicalList from '@/components/GeologicalList';
@@ -80,7 +79,7 @@ const Index = () => {
   const selectedItemData = selectedItem ? getGeologicalDataById(selectedItem) : null;
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col">
+    <div className="h-screen bg-[#0A0A0A] flex flex-col overflow-hidden">
       {/* Mobile mineral selector */}
       <MineralSidebar 
         selectedMineral={selectedMineral} 
@@ -118,7 +117,7 @@ const Index = () => {
         </div>
         
         {/* Map container */}
-        <div className={`flex-1 p-4 ${selectedItem ? 'block' : 'hidden md:block'}`}>
+        <div className={`flex-1 p-4 overflow-hidden ${selectedItem ? 'block' : 'hidden md:block'}`}>
           <MapContainer 
             selectedMineral={selectedMineral}
             selectedPackage={selectedItem}
