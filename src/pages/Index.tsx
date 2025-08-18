@@ -6,6 +6,53 @@ import MapContainer from '@/components/MapContainer';
 import SearchBar from '@/components/SearchBar';
 import SearchSuggestions from '@/components/SearchSuggestions';
 import { getGeologicalDataByMineral, getGeologicalDataById, mockGeologicalData } from '@/data/mockData';
+import MapboxTest from '@/components/MapboxTest';
+
+const defaultStyle = 'mapbox://styles/mapbox/streets-v11';
+
+const mineralMapDetails: Record<string, {
+  style: string;
+  accessToken: string;
+  center?: [number, number];
+  zoom?: number;
+}> = {
+  gold: {
+    style: 'mapbox://styles/dennisheita/cmddohjgt06ua01sh5dds4yeq',
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+  copper: {
+    style: 'mapbox://styles/dennisheita/cmddqqd5700by01r1f0085y6x',
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+  tin: {
+    style: 'mapbox://styles/dennisheita/cmddr8cnh011r01qugkj59nft?fresh', // Add ?fresh to force reload
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+  uranium: {
+    style: 'mapbox://styles/dennisheita/cmczjqrdv006x01qu0ttn38kz',
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+  diamond: {
+    style: 'mapbox://styles/dennisheita/cmddsfhl701pt01sb8k7560h9',
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+  'rare-earth': {
+    style: 'mapbox://styles/dennisheita/cmddtm215012m01s9671g46ut',
+    accessToken: 'pk.eyJ1IjoiZGVubmlzaGVpdGEiLCJhIjoiY21iOTZlN3pyMGU0MjJqc2Iyb21maWo2NCJ9.BiMFneNIv8OenQL73MaKMg',
+    center: [18.5, -22.5],
+    zoom: 5,
+  },
+};
 
 const Index = () => {
   const [selectedMineral, setSelectedMineral] = useState('gold');
@@ -102,7 +149,7 @@ const Index = () => {
         isMobile={true}
       />
       
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden h-full">
         {/* Desktop sidebar */}
         <MineralSidebar 
           selectedMineral={selectedMineral} 
@@ -132,11 +179,13 @@ const Index = () => {
         </div>
         
         {/* Map container */}
-        <div className={`flex-1 p-4 overflow-hidden ${selectedItem ? 'block' : 'hidden md:block'}`}>
+        <div className={`flex-1 overflow-hidden h-full ${selectedItem ? 'block' : 'hidden md:block'}`}>
           <MapContainer 
             selectedMineral={selectedMineral}
             selectedPackage={selectedItem}
+            mapDetails={mineralMapDetails[selectedMineral] || mineralMapDetails['gold']}
           />
+          {/* <MapboxTest /> */}
           
           {/* Mobile back button */}
           {selectedItem && (
